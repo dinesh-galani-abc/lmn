@@ -1,0 +1,14 @@
+<main class="main">
+  <div class="content">
+    <div class="left-side">
+      <h1>Welcome to LMN Middleware Authentication</h1>
+      <form (ngSubmit)="onSubmit()" #emailForm="ngForm">
+        <label for="email">Enter your email address:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="email" required />
+        <button type="submit" [disabled]="!emailForm.form.valid">Continue</button>
+      </form>
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    </div>
+  </div>
+</main>
+<router-outlet />
