@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -6,33 +7,32 @@ import { Router } from '@angular/router';
 })
 
 export class Auth {
-  private idpMap: { [domain: string]: string } = {
-    'companyA.com': 'https://idp.companyA.com/oauth2/authorize',
-    'companyB.org': 'https://idp.companyB.org/oauth2/authorize'
-  };
 
-  private clientIdMap: { [domain: string]: string } = {
-    'companyA.com': 'client-id-a',
-    'companyB.org': 'client-id-b'
-  };
+  //private redirectUri = 'http://localhost:4200/callback';
+  private apiUri = 'https://localhost:7117/';
 
-  private redirectUri = 'http://localhost:4200/callback';
-
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient) { }
 
   redirectToIdp(email: string): void {
-    const domain = email.split('@')[1];
+    const body = { email };
+    const endpoint = `${this.apiUri.replace(/\/$/, '')}/api/auth/begin`;
 
-    const idpUrl = this.idpMap[domain];
-    const clientId = this.clientIdMap[domain];
-
-    if (!idpUrl || !clientId) {
-      alert('User not found.');
-      return;
-    }
-
-    const authUrl = `${idpUrl}?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(this.redirectUri)}&scope=openid profile email&state=randomState123`;
-
-    window.location.href = authUrl;
+    this.http
+      .post<{ authUrl: string }>(endpoint, body /*, { headers } */)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          if (response?.authUrl) {
+            window.location.href = response.authUrl;
+          } else {
+            console.error('No authUrl in response');
+            alert('Invalid response from server.');
+          }
+        },
+        error: (err) => {
+          console.error('Failed to get auth URL:', err);
+          alert('Something went wrong while redirecting.');
+        },
+      });
   }
 }

@@ -22,6 +22,7 @@ export class LoginFormComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const email = this.loginForm.value.email;
+      sessionStorage.setItem('email', email);
       this.authService.redirectToIdp(email);
     }
   }

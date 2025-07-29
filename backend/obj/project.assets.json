@@ -465,11 +465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dinesh.Galani\\source\\repos\\LMN\\backend\\LMN\\LMN.csproj",
+      "projectUniqueName": "C:\\Users\\Dinesh.Galani\\source\\repos\\LMN\\backend\\LMN.csproj",
       "projectName": "LMN",
-      "projectPath": "C:\\Users\\Dinesh.Galani\\source\\repos\\LMN\\backend\\LMN\\LMN.csproj",
+      "projectPath": "C:\\Users\\Dinesh.Galani\\source\\repos\\LMN\\backend\\LMN.csproj",
       "packagesPath": "C:\\Users\\Dinesh.Galani\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dinesh.Galani\\source\\repos\\LMN\\backend\\LMN\\obj\\",
+      "outputPath": "C:\\Users\\Dinesh.Galani\\source\\repos\\LMN\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dinesh.Galani\\AppData\\Roaming\\NuGet\\NuGet.Config",
