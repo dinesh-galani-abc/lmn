@@ -1,27 +1,12 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrls: ['./app.scss']
+  styleUrl: './app.scss'
 })
-export class AppComponent {
-  email = '';
-  errorMessage = '';
-
-  constructor(private http: HttpClient) {}
-
-  onSubmit() {
-    this.errorMessage = '';
-    this.http.post<{ redirectUrl: string }>('/api/auth/begin', { email: this.email })
-      .subscribe({
-        next: (res) => {
-          window.location.href = res.redirectUrl;
-        },
-        error: (err) => {
-          this.errorMessage = err.error?.message || 'An error occurred. Please try again.';
-        }
-      });
-  }
+export class App {
+  protected readonly title = signal('middleware-auth-app');
 }

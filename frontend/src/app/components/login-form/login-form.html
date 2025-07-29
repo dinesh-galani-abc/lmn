@@ -1,0 +1,20 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="title">Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="Enter your email"
+        [class.invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+      />
+      <div class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        <small>Enter a valid email address</small>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid">Continue</button>
+    </form>
+  </div>
+</div>
